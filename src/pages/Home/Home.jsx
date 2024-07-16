@@ -1,18 +1,18 @@
 import { Helmet } from "react-helmet"
-import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
-    const {user}=useAuth()
+
     
+  
     return (
-        <div>
+        <div className="h-[2000px]">
              <Helmet>
                 <meta charSet="utf-8" />
                 <title>SM Cash | Home</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
-            <div>
-                this is home:{user}
+            <div className="text-3xl font-bold">
+                this is home
             </div>
         </div>
     );

@@ -10,6 +10,7 @@ import Home from './pages/Home/Home';
 import Registration from './pages/Authentication/Registration';
 import Login from './pages/Authentication/Login';
 import  { Toaster } from 'react-hot-toast';
+import DashBoardLayout from './layouts/DashBoardLayout';
 
 const router = createBrowserRouter([
   {
@@ -28,9 +29,13 @@ const router = createBrowserRouter([
         path:'/login',
         element:<Login/>
       },
-      {}
+      
     ],
   },
+  {
+    path: "/dashboard",
+    element: <DashBoardLayout/>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

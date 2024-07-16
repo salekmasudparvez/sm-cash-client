@@ -4,23 +4,23 @@
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width: 26px;
+    position: relative;
+    width: 30px;
     height: 26px;
     left: 26px;
     top: 26px;
-    background-color: #ffffff;
+   
   }
   
   /* Color/shape of burger icon bars */
   .bm-burger-bars {
-    background:#FE1280;
+    background:#eee9ec;
     
   }
   
   /* Color/shape of burger icon bars on hover*/
   .bm-burger-bars-hover {
-    background: #a90000;
+    background: #acacac;
   }
   
   /* Position and sizing of clickable cross button */
@@ -69,12 +69,12 @@
   .bm-item {
     display: inline-block;
     padding: 4px;
-    border:2px solid #fefefe00;
+    border:2px solid #00000000;
     
   }
   .bm-item:hover{
     color:#E2126D;
-    border:2px solid #373a47;
+    border:2px solid #E2126D;
   }
   
   /* Styling of overlay */

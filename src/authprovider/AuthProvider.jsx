@@ -1,33 +1,56 @@
-import { createContext, useEffect, useState } from "react";
-import { PropTypes } from 'prop-types';
-import { jwtDecode } from "jwt-decode";
+// import React, { createContext, useState, useEffect } from 'react';
+// import jwtDecode from 'jwt-decode';
+// import PropTypes from 'prop-types';
 
+// export const AuthContext = createContext(null);
 
+// const AuthProvider = ({ children }) => {
+//   const [isAuthenticated, setIsAuthenticated] = useState(false);
+//   const [user, setUser] = useState(null);
+//   console.log(user)
 
-export const AuthContext = createContext(null);
-const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+//   useEffect(() => {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//       try {
+//         const decodedToken = jwtDecode(token);
+//         const currentTime = Date.now() / 1000;
+//         if (decodedToken.exp < currentTime) {
+//           localStorage.removeItem('token');
+//           setIsAuthenticated(false);
+//           setUser(null);
+//         } else {
+//           setIsAuthenticated(true);
+//           setUser(decodedToken.email);
+//         }
+//       } catch (error) {
+//         console.error('Invalid token:', error);
+//         localStorage.removeItem('token');
+//         setIsAuthenticated(false);
+//         setUser(null);
+//       }
+//     } else {
+//       setIsAuthenticated(false);
+//       setUser(null);
+//     }
+//   }, []);
 
+//   const GetAllData = {
+//     isAuthenticated,
+//     user,
+//     setIsAuthenticated,
+//     setUser,
+//   };
 
-    const LogOutUser = () => {
+//   return (
+//     <AuthContext.Provider value={GetAllData}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
 
-        return signOut(auth)
-    }
-    
+// AuthProvider.propTypes = {
+//   children: PropTypes.node.isRequired,
+// };
 
-   
-    const GetAllData = {
-        user, LogOutUser, creatUserPassword, signInWithPassword, loading, setLoading, setUser
-    }
-    return (
-        <AuthContext.Provider value={GetAllData}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
-AuthProvider.propTypes = {
-    children: PropTypes.element
-}
-
-export default AuthProvider;
+// export default AuthProvider;

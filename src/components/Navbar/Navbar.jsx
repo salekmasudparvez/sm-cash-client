@@ -8,7 +8,7 @@ const Navbar = () => {
         // Add your settings functionality here
     }, []);
     return (
-        <div className='bg-[#E2126D]  z-10'>
+        <div className='bg-[#E2126D] min-h-20  z-10'>
             <div className='lg:hidden'>
                 <Menu>
                     <a id="home" className="menu-item" href="/">Home</a>
@@ -25,16 +25,8 @@ const Navbar = () => {
                 </div>
                 <div className="flex-none">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Link</a></li>
-                        <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="bg-base-100 rounded-t-none p-2">
-                                    <li><a>Link 1</a></li>
-                                    <li><a>Link 2</a></li>
-                                </ul>
-                            </details>
-                        </li>
+                        <li><a className='btn rounded text-white hover:bg-[#fff] hover:text-black bg-[#E2126D] border-2 border-white hover:border-white'>Dashboard</a></li>
+                       
                     </ul>
                 </div>
             </div>
