@@ -11,7 +11,7 @@ const SIdebar = () => {
         event.preventDefault();
         // Add your settings functionality here
     }, []);
-    const menuItems = [
+    const menuItemsUser = [
         {
             label: 'Balance',
             icon: 'icon-park-outline:bank-card',
@@ -20,34 +20,54 @@ const SIdebar = () => {
         {
             label: 'Send money',
             icon: 'fa:send-o',
-            path: '/sendmoney'
+            path: '/dashboard/send'
 
         },
         {
             label: 'Cash in',
             icon: 'iconoir:hand-cash',
-            path: '/cashin'
+            path: '/dashboard/cashin'
         },
         {
             label: 'Cash out',
             icon: 'solar:cash-out-bold',
-            path: '/cashout'
+            path: '/dashboard/cashout'
 
         },
         {
             label: 'Transactions',
             icon: 'icon-park-outline:transaction-order',
-            path: '/transaction'
+            path: '/dashboard/transaction'
+
+        }
+    ]
+    const menuItems=[
+        {
+            label: 'Balance',
+            icon: 'icon-park-outline:bank-card',
+            path: '/dashboard'
+        },
+        {
+            label: 'Transactions',
+            icon: 'icon-park-outline:transaction-order',
+            path: '/dashboard/agent/transaction'
+
+        },
+        {
+            label: 'Transactions History',
+            icon: 'icon-park-outline:transaction-order',
+            path: '/dashboard/agent/transactionhistory'
 
         }
     ]
     return (
-        <>
-        <div className='lg:hidden'>
+        <div className='bg-white'>
+        <div className='lg:hidden w-full bg-[#E2126D] h-20'>
             
                 <Menu>
                    
-                  {menuItems.map((item, index) => <a key={index} className="menu-item" href="/">{item.label}</a>)}
+                  {menuItems.map((item, index) => <a key={index} className="menu-item" href={item.path}>{item.label}</a>)}
+                    <a className="menu-item--small" href="">Request for Agent</a>
                     <a onClick={showSettings} className="menu-item--small" href="">Log out</a>
                 </Menu>
             </div>
@@ -58,6 +78,7 @@ const SIdebar = () => {
                 <nav className="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
                     {menuItems.map((item, index) => (
                         <NavLink
+                        end
                             to={item.path}
                             key={index}
                             role="button"
@@ -80,9 +101,22 @@ const SIdebar = () => {
                             )}
                         </NavLink>
                     ))}
+                     <button
+                        end
+                          
+                            role="button"
+                            tabIndex="0"
+                            className="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-red-900 focus:text-red-900 active:text-red-900 outline-none"
+                        >
+                            <div className="grid place-items-center mr-4">
+                                <Icon icon="mdi:account-pending"></Icon>
+                            </div>
+                            Request for agent
+                            
+                        </button>
                 </nav>
             </div>
-        </>
+        </div>
 
     );
 };

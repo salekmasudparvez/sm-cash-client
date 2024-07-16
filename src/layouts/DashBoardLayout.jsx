@@ -5,9 +5,9 @@ const DashBoardLayout = () => {
    
         
     return (
-        <div className="flex">
+        <div className="lg:flex">
         <SIdebar> </SIdebar>
-        <div className="h-screen overflow-y-auto overflow-x-auto">
+        <div className="h-screen overflow-y-auto overflow-x-auto flex-1 bg-white">
             <Outlet></Outlet>
         </div>
         </div>
