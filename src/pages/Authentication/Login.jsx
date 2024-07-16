@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import Banner from '../../assets/LoginBanner.png'
 const Login = () => {
     return (
-        <div className="bg-white flex h-full ">
+        <div className="lg:bg-white p-5 lg:p-0 lg:bg-[url('')] bg-[url('https://raw.githubusercontent.com/salekmasudparvez/sm-cash-client/main/src/assets/LoginBanner.png')] bg-no-repeat bg-center bg-cover flex h-full ">
             <div className='h-full lg:flex hidden min-h-screen bg-[#FE1280] w-2/3 object-cover '>
                 <img src={Banner} className='w-full h-full' alt="Singup Banner" />
             </div>
@@ -23,7 +24,7 @@ const Login = () => {
                 </form>
                 
                 <p className="text-xs text-center sm:px-6 dark:text-gray-600">Don't have any account ?
-                    <a className="btn btn-link text-[#FE1280]">Register</a>
+                    <Link to="/registration" className="btn btn-link text-[#FE1280]">Register</Link>
                 </p>
             </div>
             </div>

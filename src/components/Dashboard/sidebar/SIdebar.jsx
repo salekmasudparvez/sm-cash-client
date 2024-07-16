@@ -3,10 +3,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useCallback } from 'react';
 import { slide as Menu } from 'react-burger-menu';
+import useAuth from '../../../hooks/useAuth';
 
 
 
 const SIdebar = () => {
+    const {userEmail,loading}=useAuth()
+    //console.log(userEmail)
     const showSettings = useCallback((event) => {
         event.preventDefault();
         // Add your settings functionality here
@@ -15,7 +18,7 @@ const SIdebar = () => {
         {
             label: 'Balance',
             icon: 'icon-park-outline:bank-card',
-            path: '/dashboard'
+            path: '/'
         },
         {
             label: 'Send money',
@@ -45,7 +48,7 @@ const SIdebar = () => {
         {
             label: 'Balance',
             icon: 'icon-park-outline:bank-card',
-            path: '/dashboard'
+            path: '/'
         },
         {
             label: 'Transactions',
