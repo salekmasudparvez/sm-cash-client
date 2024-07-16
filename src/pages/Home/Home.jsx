@@ -1,6 +1,9 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet"
+import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
+    const {user}=useAuth()
+    
     return (
         <div>
              <Helmet>
@@ -8,6 +11,9 @@ const Home = () => {
                 <title>SM Cash | Home</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
+            <div>
+                this is home:{user}
+            </div>
         </div>
     );
 };
