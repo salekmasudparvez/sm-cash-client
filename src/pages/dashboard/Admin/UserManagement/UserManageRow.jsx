@@ -1,26 +1,45 @@
 import { Description, Field, Label, Select } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import clsx from 'clsx'
-import { useState } from 'react';
-const UserManageRow = () => {
-    const [valueRole,setValueRole]=useState("")
+import { Hourglass } from 'react-loader-spinner';
+
+
+const UserManageRow = ({isLoading,refetch,user,setBlock}) => {
+    const { phoneNumber,email, role, status,username }=user||{};
+    //console.log(status)
     const handleRole =(e)=>{
-        console.log(e.target.value)
-        setValueRole(e.target.value)
+        setBlock({user,status:e.target.value,isOpen:true})
+    }
+    
+    if ( isLoading) {
+        return (<div className="flex justify-center items-center w-full min-h-screen">
+            <Hourglass
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="hourglass-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                colors={['#a81a57', '#E2126D']}
+            />
+        </div>)
     }
     return (
         <tr>
-            <td class="border px-4 py-2">01405729408</td>
-            <td class="border px-4 py-2">Emai</td>
-            <td class="border px-4 py-2">Role</td>
+            <td class="border px-4 py-2">{username}</td>
+            <td class="border px-4 py-2">
+                <div>
+                    <h1>{email}</h1>
+                    <h1>{phoneNumber}</h1>
+                </div></td>
+            <td class="border px-4 py-2">{role}</td>
             <td class="border px-4 py-2">
                
                 <Select
                 onChange={handleRole}
-                value={valueRole}
-                    className={`mt-3 block w-full appearance-none rounded-lg border-none ${valueRole==="" && 'bg-gray-100'} ${valueRole==="rejected" && 'bg-red-200'} ${valueRole==="approved" && 'bg-green-200'} py-1.5 px-3 text-sm/6 text-gray-700 focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25`}
+                value={status}
+                    className={`mt-3 block w-full appearance-none rounded-lg border-none ${status==="pending" && 'bg-gray-100'} ${status==="rejected" && 'bg-red-200'} ${status==="approved" && 'bg-green-200'} py-1.5 px-3 text-sm/6 text-gray-700 focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25`}
                 >
-                    <option disabled value="">Select</option>
+                    <option disabled value="pending">Select</option>
                     <option value="approved">Activate</option>
                     <option value="rejected">Block</option>
                 </Select>
