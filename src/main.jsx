@@ -25,6 +25,7 @@ import {
 import PrivateRoute from './privateRoutes/PrivateRoute';
 import PendingPage from './components/Dashboard/PendingPage/PendingPage';
 import UserManagement from './pages/dashboard/Admin/UserManagement/UserManagement';
+import Transactions from './pages/dashboard/Admin/Transactions/Transactions';
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
 
@@ -68,7 +69,12 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/admin',
         element: <UserManagement />
-      }
+      },
+      {
+        path: '/dashboard/alltransactions',
+        element: <Transactions />
+      },
+
     ]
   },
   {

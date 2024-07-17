@@ -42,20 +42,11 @@ const SIdebar = ({ openModal }) => {
     </>
 
     const adminSiderBarMenu = <>
-        <SidebarMenu name="User Management" icon="icon-park-outline:bank-card" path="/" />
+        <SidebarMenu name="User Management" icon="icon-park-outline:bank-card" path="/dashboard/admin" />
+        <SidebarMenu name="All Transactions" icon="icon-park-outline:transaction" path="/dashboard/alltransactions" />
     </>
     const extraMenu = <>
-        {/* <button
-            role="button"
-            tabIndex="0"
-            className="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-red-900 focus:text-red-900 active:text-red-900 outline-none"
-        >
-            <div className="grid place-items-center mr-4">
-                <Icon icon="mdi:account-pending"></Icon>
-            </div>
-            Request for agent
-
-        </button> */}
+        
         {role?.status === "pending" && <SidebarMenu name="Status" icon="material-symbols:pending-actions-sharp" path="/dashboard/pending" />}
         <button
             onClick={openModal}
@@ -100,7 +91,11 @@ const SIdebar = ({ openModal }) => {
             </div>
             <div className="relative lg:flex hidden flex-col bg-clip-border rounded bg-white text-gray-700 min-h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
                 <div className="mb-2 p-4">
-                    <h5 className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-[#E2126D]">Account details</h5>
+                    <h5 className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-[#E2126D]">
+                    {role?.role === "user" ? "User panel" : <></>}
+                    {role?.role === "agent" ? "Agent panel" : <></>}
+                    {role?.role === "admin" ? "Admin panel" : <></>}
+                        </h5>
                 </div>
                 <nav className="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
                     {role?.role === "user" ? userSiderBarMenu : <></>}
