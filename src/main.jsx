@@ -22,6 +22,9 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import PrivateRoute from './privateRoutes/PrivateRoute';
+import PendingPage from './components/Dashboard/PendingPage/PendingPage';
+import UserManagement from './pages/dashboard/Admin/UserManagement/UserManagement';
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
 
@@ -31,7 +34,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <UserRoutes><Balance /></UserRoutes>,
+        element: <PrivateRoute><Balance /></PrivateRoute>,
+      },
+      {
+        path: "/dashboard/pending",
+        element: <PrivateRoute><PendingPage /></PrivateRoute>,
       },
       {
         path: "/dashboard/send",
@@ -57,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/agent/transactionhistory',
         element: <TransactionHistory />
+      },
+      {
+        path: '/dashboard/admin',
+        element: <UserManagement />
       }
     ]
   },

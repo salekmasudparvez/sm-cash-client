@@ -1,18 +1,19 @@
 import toast from 'react-hot-toast';
-import Banner from '../../assets/singupBanner.png'
 import axios from 'axios';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
-import { Description, Field, Label, Select } from '@headlessui/react'
+import { Field, Label, Select } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 
 const Registration = () => {
     const [loading, setLoading] = useState(false)
     const [selectRole, setSelectRole] = useState("");
     const navidate = useNavigate()
+    const {setToken}= useAuth()
 
 
 
@@ -77,6 +78,7 @@ const Registration = () => {
                         if (res.data.token) {
                             //console.log(res);
                             localStorage.setItem('accessToken', res.data.token);
+                            setToken(res?.data?.token)
                         }
                         toast.success(result.data.message);
                         setLoading(false)
@@ -86,7 +88,7 @@ const Registration = () => {
                     .catch(err => {
                         console.error('Error during axios request:', err);
                     });
-                    setLoading(false)
+                setLoading(false)
             }
             setLoading(false)
         } catch (error) {
@@ -150,9 +152,10 @@ const Registration = () => {
                             <input type="number" name="pinNumber" id="pin" placeholder="Please enter your 5-digit pin" className="w-full px-4 py-2 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:outline-[#FE1280] focus:outline" />
 
                         </div>
-                        <button className="btn btn-block rounded bg-[#FE1280] text-white">
+                        <button type='submit' className="btn btn-block rounded bg-[#FE1280] text-white">
                             {loading && <span className='text-xl text-[#ffffff]'><Icon icon="line-md:loading-twotone-loop" /></span>}
-                            <span>Register</span></button>
+                            <span>Register</span>
+                        </button>
                     </form>
 
                     <p className="text-xs text-center sm:px-6 dark:text-gray-600">Already have an account ?

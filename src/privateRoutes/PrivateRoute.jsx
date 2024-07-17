@@ -8,20 +8,25 @@ import userRole from "../hooks/userRole";
 
 
 
-const UserRoutes = ({ children }) => {
-    const { loading } = useAuth();
-    const [role,isLoading] = userRole()
+const PrivateRoute = ({ children }) => {
+    const { loading, userEmail } = useAuth();
+    const { role, isLoading } = userRole()
     const location = useLocation();
 
 
-    if (role?.role==="user") {
-        return <>
-            {children}
-        </>
+    if (userEmail) {
+        if (role?.role === "admin") {
+            return <Navigate to='/dashboard/admin' replace={true}></Navigate>
+        } else {
+            return <>
+                {children}
+            </>
+        }
+
     }
 
 
-    if (loading ||isLoading) {
+    if (loading || isLoading) {
         return (<div className="flex justify-center items-center w-full min-h-screen">
             <Hourglass
                 visible={true}
@@ -37,7 +42,7 @@ const UserRoutes = ({ children }) => {
     return <Navigate to='/login' state={location} replace={true}></Navigate>
 
 };
-UserRoutes.propTypes = {
+PrivateRoute.propTypes = {
     children: PropTypes.node.isRequired,
 }
-export default UserRoutes;
+export default PrivateRoute;
