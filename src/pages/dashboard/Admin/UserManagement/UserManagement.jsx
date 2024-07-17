@@ -25,10 +25,14 @@ const UserManagement = () => {
     })
     const updateRole = async (dataBlock) => {
         try {
+            const initialMoney = dataBlock?.user?.role==="agent"?10000:40;
             const res = await axios.patch('http://localhost:5000/admin/user', {
                 id: dataBlock.user._id,
                 status: dataBlock?.status,
-                email: dataBlock.user.email
+                email: dataBlock.user.email,
+                phoneNumber: dataBlock?.user.phoneNumber,
+                initialMoney:initialMoney
+
             })
             console.log(res.data?.modifiedCount)
             if (res.data?.modifiedCount > 0) {

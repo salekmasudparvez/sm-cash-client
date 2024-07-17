@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const SendMoney = () => {
     const { userEmail } = useAuth();
     const [send, setSend] = useState({})
-  
-    const {data}=useQuery({
+
+    const { data } = useQuery({
         queryKey: ['balance1'],
         queryFn: async () => {
             const response = await axios.get(`http://localhost:5000/balance/${userEmail}`);
@@ -15,16 +16,16 @@ const SendMoney = () => {
             return data
         }
     })
-    console.log(data)
-    const {_id,balance,ownerEmail,userID} = data || {}
+    //console.log(data)
+    const { _id, balance, ownerEmail, userID } = data || {}
     const handleSendMoney = (e) => {
         e.preventDefault();
-       
+
         const recNumber = e.target.recNumber.value;
         const amount = e.target.amount.value;
         const pin = e.target.pin.value;
         const SendMoney = {
-            receiverNumber:recNumber,
+            receiverNumber: recNumber,
             amount,
             pin,
             senderEmail: userEmail
@@ -33,8 +34,35 @@ const SendMoney = () => {
         document.getElementById('my_modal_5').showModal()
 
     }
-    const confirmSendMoney =async(send)=>{
-       const res = await axios.post('http://localhost:5000/sendmoney',)
+    const balanceCalc = parseInt(balance);
+    const sendAmount = parseInt(send?.amount||"0");
+    const charge = sendAmount <= 100  ? 0 : 5;
+    const calculatedBalance = balanceCalc - sendAmount - charge
+    const sendMoneyWithChareg =sendAmount+charge
+    //console.log(sendMoneyWithChareg)
+
+    const confirmSendMoney = async (send) => {
+        const sendDoc = {
+            receiverNumber: send?.receiverNumber,
+            amount: sendMoneyWithChareg,
+            pin:send?.pin,
+            senderEmail: userEmail,
+             type:"send-money"
+        }
+        //console.log(sendDoc)
+        try {
+             const res = await axios.post('http://localhost:5000/sendmoney',sendDoc)
+           console.log(res.data)
+           if(res.data.message){
+            toast.success(res.data.message)
+            document.getElementById('my_modal_5').close()
+           }
+           document.getElementById('my_modal_5').close()
+        } catch (error) {
+            console.log(error)
+            document.getElementById('my_modal_5').close()
+        }
+          
     }
     return (
         <div className="bg-white w-full h-full text-gray-800 py-6 ">
@@ -73,18 +101,18 @@ const SendMoney = () => {
             <dialog id="my_modal_5" className="modal modal-middle">
                 <div className="modal-box bg-white text-gray-700">
                     <h3 className="font-bold text-xl">Please confirm send-money!</h3>
-                    
+
                     <p className="p-4 flex border rounded text-red-500 font-medium text-center bg-gray-500 bg-opacity-30">
-                        {parseInt(send?.amount)>=50?
-                        <>
-                        <div className="w-1/2 ">
-                            Current balance:{parseInt(balance)-parseInt(send?.amount)}$
-                        </div>
-                        <div className="w-1/2">
-                              Charge : {parseInt(send?.amount)<100 && parseInt(send?.amount)>=50 ?"0":"5" }$
-                        </div>
-                        </>:
-                        <div className="w-full text-center text-red-500 font-medium">Transaction amount should be greater than 50$ </div>
+                        {parseInt(send?.amount) >= 50 ?
+                            <>
+                                <div className="w-1/2">
+                                    Current balance: {calculatedBalance}$
+                                </div>
+                                <div className="w-1/2">
+                                    Charge :{charge}
+                                </div>
+                            </> :
+                            <div className="w-full text-center text-red-500 font-medium">Transaction amount should be greater than 50$ </div>
                         }
                     </p>
                     <p className="p-4">
@@ -94,7 +122,7 @@ const SendMoney = () => {
                         </ul>
                     </p>
                     <div className="modal-action">
-                    <button onClick={()=>confirmSendMoney(send)} className={`btn rounded bg-[#E2126D] ${parseInt(send?.amount)<50 && "btn-disabled"} hover:bg-[#e2126ca4] text-black`}>Send</button>
+                        <button onClick={() => confirmSendMoney(send)} className={`btn rounded bg-[#E2126D] ${parseInt(send?.amount) < 50 && "btn-disabled"} hover:bg-[#e2126ca4] text-black`}>Send</button>
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn rounded bg-[#E2126D] text-black hover:bg-[#e2126ca4]">Close</button>

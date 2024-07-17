@@ -5,12 +5,13 @@ const Cashin = () => {
      const recNumber = e.target.recNumber.value;
      const amount = e.target.amount.value;
      const pin = e.target.pin.value;
-     const SendMoney={
+     const cashIn={
         recNumber,
         amount,
         pin
      }
-     console.log(SendMoney)
+    //  cashin
+     console.log(cashIn)
     }
     return (
         <div className="bg-white w-full h-full text-gray-800 py-6 ">

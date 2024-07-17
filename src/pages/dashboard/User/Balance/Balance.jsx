@@ -20,7 +20,7 @@ const Balance = () => {
         <div className="flex h-full md:flex-row flex-col bg-white rounded min-w-full py-7 lg:px-8 px-4 ">
             <div className="flex flex-col justify-start items-center w-1/2">
                 <div className="stat-title text-gray-800">Account balance</div>
-                <div className="stat-value text-[#E2126D]">${balance}</div>
+                <div className="stat-value text-[#E2126D]">${balance?balance:"0"}</div>
                 <div className="stat-actions">
                     <Link to="/dashboard/cashin" className="btn btn-sm bg-[#E2126D] text-white hover:bg-red-300">Add money</Link>
                 </div>
