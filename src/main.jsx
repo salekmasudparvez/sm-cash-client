@@ -26,6 +26,8 @@ import PrivateRoute from './privateRoutes/PrivateRoute';
 import PendingPage from './components/Dashboard/PendingPage/PendingPage';
 import UserManagement from './pages/dashboard/Admin/UserManagement/UserManagement';
 import Transactions from './pages/dashboard/Admin/Transactions/Transactions';
+import AgentRoute from './privateRoutes/AgentRoutes';
+import AdminRoute from './privateRoutes/AdminRoute';
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
 
@@ -60,19 +62,19 @@ const router = createBrowserRouter([
       //agent
       {
         path: '/dashboard/agent/transaction',
-        element: <TransactionManagement />
+        element: <AgentRoute><TransactionManagement /></AgentRoute>
       },
       {
         path: '/dashboard/agent/transactionhistory',
-        element: <TransactionHistory />
+        element: <AgentRoute><TransactionHistory /></AgentRoute>
       },
       {
         path: '/dashboard/admin',
-        element: <UserManagement />
+        element:<AdminRoute><UserManagement /></AdminRoute> 
       },
       {
         path: '/dashboard/alltransactions',
-        element: <Transactions />
+        element: <AdminRoute><Transactions /></AdminRoute> 
       },
 
     ]

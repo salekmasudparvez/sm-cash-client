@@ -2,7 +2,7 @@
 import { formatISO, parseISO } from 'date-fns';
 
 const TransactionRow = ({transaction}) => {
-    console.log(transaction);
+    //console.log(transaction);
     const {amount,receiverNumber,senderEmail,timestamp,_id,type,status}=transaction||{};
     const date = formatISO(timestamp)
     return (

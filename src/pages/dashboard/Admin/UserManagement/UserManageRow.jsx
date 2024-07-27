@@ -36,7 +36,7 @@ const UserManageRow = ({ isLoading, refetch, user, setBlock }) => {
             <td className="border px-4 py-2 relative">
                 <Select
                     onChange={handleRole}
-                    value={status}
+                    defaultValue={status}
                     className={`mt-3 block w-full appearance-none rounded-lg border-none py-1.5 px-3 text-sm/6 text-gray-700 focus:outline-none ${status === "pending" ? 'bg-gray-100' :
                             status === "rejected" ? 'bg-red-200' :
                                 status === "approved" ? 'bg-green-200' : ''

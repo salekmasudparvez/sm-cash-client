@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('accessToken');
     setUserEmail(null);
     checkAuth();
-    return <Navigate to="/login" replace={true}/>
+    return <Navigate to="/th" replace={true}/>
   };
 
   // Check authentication status when the component mounts

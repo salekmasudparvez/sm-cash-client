@@ -1,7 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../../../hooks/useAuth";
 import TransactionHistoryRow from "./TransactionHistoryRow";
+import axios from "axios";
 
 
 const TransactionHistory = () => {
+    const { userEmail } = useAuth()
+    const { data: transactionsHistory } = useQuery({
+        queryKey: ['transactionsHistoryr'],
+        queryFn: async () => {
+            const response = await axios(`http://localhost:5000/agentTransactions/${userEmail}`);
+            const data = response.data
+            return data
+        }
+    })
     return (
         <div className="bg-white h-full w-full">
             <h1 className="text-2xl bg-white text-red-400 font-bold p-6 text-center">Transactions History</h1>
@@ -16,10 +28,10 @@ const TransactionHistory = () => {
                     </tr>
                 </thead>
                 <tbody>
-                  <TransactionHistoryRow/>
-                  <TransactionHistoryRow/>
-                  <TransactionHistoryRow/>
-                    
+
+                    {transactionsHistory?.map((transaction, idx) => <TransactionHistoryRow key={idx} transaction={transaction} ></TransactionHistoryRow>)}
+
+
                 </tbody>
             </table>
         </div>
