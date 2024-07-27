@@ -10,7 +10,7 @@ const TransactionManagementRow = ({ transaction ,setTrans}) => {
          document.getElementById('trans').showModal()
     }
     return (
-        <tr className='rounded-full border-2 border-opacity-0 hover:border-opacity-100 bg-gray-100 hover:bg-gray-200'>
+        <tr className='rounded-full border-none bg-gray-100 hover:bg-gray-200'>
 
             <td class="text-center px-4 py-2">{senderEmail}</td>
             <td class="text-center px-4 py-2">

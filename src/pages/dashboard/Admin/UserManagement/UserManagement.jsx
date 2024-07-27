@@ -10,12 +10,12 @@ const UserManagement = () => {
     const [search, setSearch] = useState(null);
     const [dataBlock, setBlock] = useState({ user: "", status: "", isOpen: false });
     //console.log(dataBlock)
-    const { isLoading, refetch, data:users } = useQuery({
-        queryKey: ['users',search],
+    const { isLoading, refetch, data: users } = useQuery({
+        queryKey: ['users', search],
         queryFn: async () => {
-            let uri = 'https://server-coral-nine.vercel.app/admin/users'
-            if(search){
-                uri = `https://server-coral-nine.vercel.app/admin/users?name=${search}`
+            let uri = 'http://localhost:5000/admin/users'
+            if (search) {
+                uri = `http://localhost:5000/admin/users?name=${search}`
             }
             console.log(uri)
             const response = await axios(uri);
@@ -25,13 +25,13 @@ const UserManagement = () => {
     })
     const updateRole = async (dataBlock) => {
         try {
-            const initialMoney = dataBlock?.user?.role==="agent"?10000:40;
-            const res = await axios.patch('https://server-coral-nine.vercel.app/admin/user', {
+            const initialMoney = dataBlock?.user?.role === "agent" ? 10000 : 40;
+            const res = await axios.patch('http://localhost:5000/admin/user', {
                 id: dataBlock.user._id,
                 status: dataBlock?.status,
                 email: dataBlock.user.email,
                 phoneNumber: dataBlock?.user.phoneNumber,
-                initialMoney:initialMoney
+                initialMoney: initialMoney
 
             })
             console.log(res.data?.modifiedCount)
@@ -48,11 +48,11 @@ const UserManagement = () => {
         }
 
     }
-    const handleSearch =async(event)=>{
-       event.preventDefault()
-       const getName = event.target.name.value;
-       setSearch(getName)
-       refetch()
+    const handleSearch = async (event) => {
+        event.preventDefault()
+        const getName = event.target.name.value;
+        setSearch(getName)
+        refetch()
     }
     return (
         <div className="bg-white h-full w-full">
@@ -65,42 +65,45 @@ const UserManagement = () => {
                         <input type="text" name="name" className="grow rounded-md placeholder:text-gray-600" placeholder="Search by name" />
                         <button type="submit" className="btn btn-circle glass bg-[#E2126D] hover:bg-[#e2126c85]">
                             <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 16 16"
-                            fill="#fff"
-                            className="h-5 w-5 opacity-100">
-                            <path
-                                fillRule="evenodd"
-                                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                                clipRule="evenodd" />
-                        </svg>
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 16"
+                                fill="#fff"
+                                className="h-5 w-5 opacity-100">
+                                <path
+                                    fillRule="evenodd"
+                                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                    clipRule="evenodd" />
+                            </svg>
                         </button>
-                        
+
                     </label>
 
                 </form>
             </div>
-            <table class="bg-white min-w-full table-auto  max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-auto text-gray-800">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2">Name</th>
-                        <th class="px-4 py-2">Email & number</th>
-                        <th class="px-4 py-2">Role</th>
-                        <th class="px-4 py-2">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users?.map((user, idx) =>
-                        <UserManageRow
-                            key={idx}
-                            user={user}
-                            refetch={refetch}
-                            isLoading={isLoading}
-                            setBlock={setBlock}
-                        />
-                    )}
-                </tbody>
-            </table>
+            <div className="overflow-y-auto overflow-x-auto">
+                <table class="bg-white table md:tabs-md lg:table-lg table-xs w-full  max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-auto text-gray-800">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Email & number</th>
+                            <th class="px-4 py-2">Role</th>
+                            <th class="px-4 py-2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users?.map((user, idx) =>
+                            <UserManageRow
+                                key={idx}
+                                user={user}
+                                refetch={refetch}
+                                isLoading={isLoading}
+                                setBlock={setBlock}
+                            />
+                        )}
+                    </tbody>
+                </table>
+            </div>
+
 
             <Dialog open={dataBlock.isOpen} onClose={() => setBlock({ user: "", status: "", isOpen: false })} className="relative z-50 ">
                 <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-20 backdrop-blur-md" />

@@ -8,7 +8,7 @@ const Transaction = () => {
     const { data: transactions } = useQuery({
         queryKey: ["transactions"],
         queryFn: async () => {
-            const response = await axios(`https://server-coral-nine.vercel.app/transactions/${userEmail}`);
+            const response = await axios(`http://localhost:5000/transactions/${userEmail}`);
             const data = response.data
             return data
         }
@@ -16,8 +16,9 @@ const Transaction = () => {
 
     return (
         <div className="bg-white h-full w-full">
-            <h1 className="text-2xl bg-white text-red-400 font-bold p-6 text-center">Transactions History</h1>
-            <table class="bg-white min-w-full table-auto  max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-auto text-gray-800">
+            <h1 className="text-2xl bg-white w-full text-red-400 font-bold p-6 text-center">Transactions History</h1>
+           <div className="overflow-y-auto overflow-x-auto">
+           <table className="table md:tabs-md lg:table-lg table-xs w-full  max-h-[calc(100vh-80px)]  text-gray-800">
                 <thead>
                     <tr>
                         <th class="px-4 py-2">Transaction ID</th>
@@ -31,6 +32,7 @@ const Transaction = () => {
                     {transactions?.map((transaction, idx) => <TransactionRow transaction={transaction} key={idx}></TransactionRow>)}
                 </tbody>
             </table>
+           </div>
         </div>
     );
 };

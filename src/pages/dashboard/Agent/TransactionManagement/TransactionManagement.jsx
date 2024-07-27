@@ -13,7 +13,7 @@ const TransactionManagement = () => {
     const {refetch, data: transactionsManage } = useQuery({
         queryKey: ['transactionsManager'],
         queryFn: async () => {
-            const response = await axios('https://server-coral-nine.vercel.app/request/transactions');
+            const response = await axios('http://localhost:5000/request/transactions');
             const data = response.data
             return data
         }
@@ -21,7 +21,7 @@ const TransactionManagement = () => {
     const {refetch:refetchNotify, data } = useQuery({
         queryKey: ['transactionsCount'],
         queryFn: async () => {
-            const response = await axios.get('https://server-coral-nine.vercel.app/notify');
+            const response = await axios.get('http://localhost:5000/notify');
             const data = response.data
             return data
         }
@@ -29,7 +29,7 @@ const TransactionManagement = () => {
     const { data: balance } = useQuery({
         queryKey: ['balance1'],
         queryFn: async () => {
-            const response = await axios(`https://server-coral-nine.vercel.app/balance/${userEmail}`);
+            const response = await axios(`http://localhost:5000/balance/${userEmail}`);
             const data = response.data
             return data
         }
@@ -57,7 +57,7 @@ const TransactionManagement = () => {
           };
            console.log(updateDoc)
           // Send the patch request
-          const res = await axios.patch('https://server-coral-nine.vercel.app/status', updateDoc);
+          const res = await axios.patch('http://localhost:5000/status', updateDoc);
           console.log(res);
       
           // Check the response and the status
@@ -95,7 +95,7 @@ const TransactionManagement = () => {
                 <h1 className="text-2xl navbar-start bg-white text-red-400 font-bold p-6 text-center">Transactions Management</h1>
 
                 <div className="navbar-end">
-                    <button title="This who" type="button" className="relative w-fit items-center p-3 bg-white hover:bg-white rounded-lg ">
+                    <button title="Notification" type="button" className="relative z-10 w-fit items-center p-3 bg-white hover:bg-white rounded-lg ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#E2126D" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                         </svg>
@@ -113,7 +113,8 @@ const TransactionManagement = () => {
                 </div>
 
             </div>
-            <table class="bg-white min-w-full table-auto  max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-auto text-gray-800">
+            <div className="overflow-y-auto overflow-x-auto">
+                 <table class="bg-white table md:tabs-md lg:table-lg table-xs w-full  max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-auto text-gray-800">
                 <thead>
                     <tr>
                         <th class="px-4 py-2">User's Email</th>
@@ -126,6 +127,8 @@ const TransactionManagement = () => {
                     {transactionsManage?.map((transaction, idx) => <TransactionManagementRow key={idx} setTrans={setTrans} transaction={transaction} ></TransactionManagementRow>)}
                 </tbody>
             </table>
+            </div>
+           
             {/* Open the modal using document.getElementById('ID').showModal() method */}
 
             <dialog id="trans" className="modal modal-middle rounded">
