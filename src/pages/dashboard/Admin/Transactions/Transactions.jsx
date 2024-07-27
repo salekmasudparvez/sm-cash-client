@@ -9,7 +9,7 @@ const Transactions = () => {
     const { data } = useQuery({
         queryKey: ["transactionsAdmin"],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/admin/transactions/${userEmail}`);
+            const response = await axios.get(`https://server-coral-nine.vercel.app/admin/transactions/${userEmail}`);
             const data = response.data;
             return data;
         }

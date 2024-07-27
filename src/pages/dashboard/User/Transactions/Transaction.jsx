@@ -8,7 +8,7 @@ const Transaction = () => {
     const { data: transactions } = useQuery({
         queryKey: ["transactions"],
         queryFn: async () => {
-            const response = await axios(`http://localhost:5000/transactions/${userEmail}`);
+            const response = await axios(`https://server-coral-nine.vercel.app/transactions/${userEmail}`);
             const data = response.data
             return data
         }

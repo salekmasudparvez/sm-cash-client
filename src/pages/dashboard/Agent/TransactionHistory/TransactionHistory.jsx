@@ -9,7 +9,7 @@ const TransactionHistory = () => {
     const { data: transactionsHistory } = useQuery({
         queryKey: ['transactionsHistoryr'],
         queryFn: async () => {
-            const response = await axios(`http://localhost:5000/agentTransactions/${userEmail}`);
+            const response = await axios(`https://server-coral-nine.vercel.app/agentTransactions/${userEmail}`);
             const data = response.data
             return data
         }
