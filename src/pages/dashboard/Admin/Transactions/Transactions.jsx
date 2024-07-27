@@ -1,7 +1,20 @@
+import { useQuery } from "@tanstack/react-query";
 import TransactionRow from "./TransactionRow";
+import useAuth from "../../../../hooks/useAuth";
+import axios from "axios";
 
 
 const Transactions = () => {
+    const {userEmail}=useAuth()
+    const {data}= useQuery({
+        queryKey: ["transactionsAdmin"],
+        queryFn: async () => {
+            const response = await axios.get(`http://localhost:5000/admin/transactions/${userEmail}`);
+            const data = response.data;
+            return data;
+        }
+    });
+    //console.log(data)
 
     return (
         <div className="bg-white h-full w-full">
@@ -16,9 +29,7 @@ const Transactions = () => {
                     </tr>
                 </thead>
                 <tbody>
-                   <TransactionRow/>
-                   <TransactionRow/>
-                   <TransactionRow/>
+                  {data?.map((transaction,idx)=><TransactionRow key={idx}  transaction={transaction} />)}
                 </tbody>
             </table>
            

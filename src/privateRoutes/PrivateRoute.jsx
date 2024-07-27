@@ -10,11 +10,12 @@ import userRole from "../hooks/userRole";
 
 const PrivateRoute = ({ children }) => {
     const { loading, userEmail } = useAuth();
-    const { role, isLoading } = userRole()
+    const [ role, isLoading ] = userRole()
     const location = useLocation();
 
 
     if (userEmail) {
+        console.log(role?.role)
         if (role?.role === "admin") {
             return <Navigate to='/dashboard/admin' replace={true}></Navigate>
         } else {
