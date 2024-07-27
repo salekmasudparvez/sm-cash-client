@@ -10,7 +10,7 @@ const userRole = () => {
     queryKey: ['role', userEmail],
     enabled: !loading && !!userEmail,
     queryFn: async () => {
-      const { data } = await axios(`http://localhost:5000/useRole/${userEmail}`)
+      const { data } = await axios(`https://server-coral-nine.vercel.app/useRole/${userEmail}`)
       console.log(data.role)
       return data
     },

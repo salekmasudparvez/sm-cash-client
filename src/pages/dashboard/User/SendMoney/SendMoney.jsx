@@ -11,7 +11,7 @@ const SendMoney = () => {
     const { data } = useQuery({
         queryKey: ['balance1'],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/balance/${userEmail}`);
+            const response = await axios.get(`https://server-coral-nine.vercel.app/balance/${userEmail}`);
             const data = response.data
             return data
         }
@@ -51,7 +51,7 @@ const SendMoney = () => {
         }
         //console.log(sendDoc)
         try {
-             const res = await axios.post('http://localhost:5000/sendmoney',sendDoc)
+             const res = await axios.post('https://server-coral-nine.vercel.app/sendmoney',sendDoc)
            console.log(res.data)
            if(res.data.message){
             toast.success(res.data.message)

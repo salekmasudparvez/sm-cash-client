@@ -9,7 +9,7 @@ const Balance = () => {
     const {data}=useQuery({
         queryKey: ['balance'],
         queryFn: async () => {
-            const response = await axios(`http://localhost:5000/balance/${userEmail}`);
+            const response = await axios(`https://server-coral-nine.vercel.app/balance/${userEmail}`);
             const data = response.data
             return data
         }

@@ -13,9 +13,9 @@ const UserManagement = () => {
     const { isLoading, refetch, data:users } = useQuery({
         queryKey: ['users',search],
         queryFn: async () => {
-            let uri = 'http://localhost:5000/admin/users'
+            let uri = 'https://server-coral-nine.vercel.app/admin/users'
             if(search){
-                uri = `http://localhost:5000/admin/users?name=${search}`
+                uri = `https://server-coral-nine.vercel.app/admin/users?name=${search}`
             }
             console.log(uri)
             const response = await axios(uri);
@@ -26,7 +26,7 @@ const UserManagement = () => {
     const updateRole = async (dataBlock) => {
         try {
             const initialMoney = dataBlock?.user?.role==="agent"?10000:40;
-            const res = await axios.patch('http://localhost:5000/admin/user', {
+            const res = await axios.patch('https://server-coral-nine.vercel.app/admin/user', {
                 id: dataBlock.user._id,
                 status: dataBlock?.status,
                 email: dataBlock.user.email,
