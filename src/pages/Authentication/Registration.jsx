@@ -62,13 +62,13 @@ const Registration = () => {
     try {
       //console.log('Sending data:', newUser); // Log the data being sent
 
-      const result = await axios.post('https://server-coral-nine.vercel.app/user', newUser);
+      const result = await axios.post('http://localhost:5000/user', newUser);
 
       if (result) {
         console.log('Registration successful:', result.data);
 
         const userInfo = { email };
-        axios.post('https://server-coral-nine.vercel.app/jwt', userInfo, {
+        axios.post('http://localhost:5000/jwt', userInfo, {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json'

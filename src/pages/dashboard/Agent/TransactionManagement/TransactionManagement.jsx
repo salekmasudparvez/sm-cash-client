@@ -13,7 +13,7 @@ const TransactionManagement = () => {
     const {refetch, data: transactionsManage } = useQuery({
         queryKey: ['transactionsManager'],
         queryFn: async () => {
-            const response = await axios('https://server-coral-nine.vercel.app/request/transactions');
+            const response = await axios('http://localhost:5000/request/transactions');
             const data = response.data
             return data
         }
@@ -21,7 +21,7 @@ const TransactionManagement = () => {
     const {refetch:refetchNotify, data } = useQuery({
         queryKey: ['transactionsCount'],
         queryFn: async () => {
-            const response = await axios.get('https://server-coral-nine.vercel.app/notify');
+            const response = await axios.get('http://localhost:5000/notify');
             const data = response.data
             return data
         }
@@ -29,7 +29,7 @@ const TransactionManagement = () => {
     const { data: balance } = useQuery({
         queryKey: ['balance1'],
         queryFn: async () => {
-            const response = await axios(`https://server-coral-nine.vercel.app/balance/${userEmail}`);
+            const response = await axios(`http://localhost:5000/balance/${userEmail}`);
             const data = response.data
             return data
         }
@@ -57,7 +57,7 @@ const TransactionManagement = () => {
           };
            console.log(updateDoc)
           // Send the patch request
-          const res = await axios.patch('https://server-coral-nine.vercel.app/status', updateDoc);
+          const res = await axios.patch('http://localhost:5000/status', updateDoc);
           console.log(res);
       
           // Check the response and the status

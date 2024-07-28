@@ -1,9 +1,11 @@
 import axios from "axios";
 import useAuth from './../../../../hooks/useAuth';
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const Cashin = () => {
     const { userEmail } = useAuth()
+    const axiosSecure = useAxiosSecure();
     const handleCashIn = async (e) => {
         e.preventDefault();
         const recNumber = e.target.recNumber.value;
@@ -13,7 +15,7 @@ const Cashin = () => {
             senderEmail: userEmail, receiverNumber: recNumber, amount: amount, pin, type: "cash-in"
         }
         try {
-            const res = await axios.post('https://server-coral-nine.vercel.app/cashin', cashIn)
+            const res = await axiosSecure.post('/cashin', cashIn)
             if (res.data.message) {
                 toast.success(res.data.message)
             }

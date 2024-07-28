@@ -13,7 +13,7 @@ const Cashout = () => {
             senderEmail: userEmail, receiverNumber: recNumber, amount: amount, pin, type: "cash-out"
         }
         try {
-            const res = await axios.post('https://server-coral-nine.vercel.app/cashin', cashOut)
+            const res = await axios.post('http://localhost:5000/cashin', cashOut)
             if (res.data.message) {
                 toast.success("Cash out request successfully")
             }
